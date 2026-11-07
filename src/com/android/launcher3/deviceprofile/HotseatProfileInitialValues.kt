@@ -182,8 +182,9 @@ data class HotseatProfileInitialValues(
                     )
                 else res.getDimensionPixelSize(R.dimen.spring_loaded_hotseat_top_margin)
 
-            val hotseatQsbHeight = res.getDimensionPixelSize(R.dimen.uwu_qsb_widget_height)
-            val hotseatQsbShadowHeight = res.getDimensionPixelSize(R.dimen.qsb_shadow_height)
+            val hotseatQsbHeight = qsbHeight
+            val hotseatQsbShadowHeight =
+                if (qsbHeight > 0) res.getDimensionPixelSize(R.dimen.qsb_shadow_height) else 0
 
             var hotseatQsbSpace: Int = responsiveHotseatSpec.hotseatQsbSpace
             val hotseatBarBottomSpace: Int =
@@ -210,6 +211,7 @@ data class HotseatProfileInitialValues(
             } else {
                 barBottomSpacePx = hotseatBarBottomSpace
             }
+            if (qsbHeight == 0) hotseatQsbSpace = 0
 
             // qsbVisualHeight is the total height of the QSB view, we leave some space at the top
             // and bottom for shadows, similar to the icon shadows.
@@ -319,8 +321,9 @@ data class HotseatProfileInitialValues(
                 }
             val hotseatBarWorkspaceSpacePx =
                 res.getDimensionPixelSize(R.dimen.dynamic_grid_hotseat_side_padding)
-            val hotseatQsbHeight = res.getDimensionPixelSize(R.dimen.uwu_qsb_widget_height)
-            val hotseatQsbShadowHeight = res.getDimensionPixelSize(R.dimen.qsb_shadow_height)
+            val hotseatQsbHeight = qsbHeight
+            val hotseatQsbShadowHeight =
+                if (qsbHeight > 0) res.getDimensionPixelSize(R.dimen.qsb_shadow_height) else 0
 
             var hotseatQsbSpace = pxFromDp(inv.hotseatQsbSpace[typeIndex], metrics)
             var hotseatBarBottomSpace =
@@ -353,6 +356,7 @@ data class HotseatProfileInitialValues(
                 barBottomSpacePx = 0
                 hotseatQsbSpace = pxFromDp(inv.hotseatQsbSpace[typeIndex], metrics)
             }
+            if (qsbHeight == 0) hotseatQsbSpace = 0
 
             val barEdgePaddingPx = hotseatBarEdgePaddingPx
             val barWorkspaceSpacePx = hotseatBarWorkspaceSpacePx
