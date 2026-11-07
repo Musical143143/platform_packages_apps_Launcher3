@@ -211,7 +211,12 @@ data class HotseatProfileInitialValues(
             } else {
                 barBottomSpacePx = hotseatBarBottomSpace
             }
-            if (qsbHeight == 0) hotseatQsbSpace = 0
+            if (qsbHeight == 0) {
+                hotseatQsbSpace = 0
+                if (!isVerticalBarLayout) {
+                    barBottomSpacePx = max(deviceProperties.insets.bottom, hotseatBarBottomSpace)
+                }
+            }
 
             // qsbVisualHeight is the total height of the QSB view, we leave some space at the top
             // and bottom for shadows, similar to the icon shadows.
@@ -356,7 +361,12 @@ data class HotseatProfileInitialValues(
                 barBottomSpacePx = 0
                 hotseatQsbSpace = pxFromDp(inv.hotseatQsbSpace[typeIndex], metrics)
             }
-            if (qsbHeight == 0) hotseatQsbSpace = 0
+            if (qsbHeight == 0) {
+                hotseatQsbSpace = 0
+                if (!isVerticalBarLayout) {
+                    barBottomSpacePx = max(deviceProperties.insets.bottom, hotseatBarBottomSpace)
+                }
+            }
 
             val barEdgePaddingPx = hotseatBarEdgePaddingPx
             val barWorkspaceSpacePx = hotseatBarWorkspaceSpacePx
